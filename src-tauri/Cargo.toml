@@ -1,7 +1,7 @@
 [package]
 name = "thecnoclaw"
-version = "0.1.0"
-description = "TheCnoClaw - AI Terminal Desktop App"
+version = "1.0.0"
+description = "ThecnoClaw - AI Terminal Desktop App"
 edition = "2021"
 
 [build-dependencies]

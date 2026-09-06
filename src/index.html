@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>ThecnoClaw</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="terminal">
+    <div id="output"></div>
+    <div id="input-line">
+      <span id="prompt">$thecnoclaw ></span>
+      <input type="text" id="cmd-input" autofocus autocomplete="off" spellcheck="false" />
+    </div>
+  </div>
+
+  <!-- Popup command bar / chat -->
+  <div id="popup" class="hidden">
+    <div id="popup-header">
+      <span id="popup-title">TheCnoClaw — AI Console</span>
+      <div id="popup-controls">
+        <span id="conn-status" class="disconnected">● terputus</span>
+        <button id="popup-close" title="Sembunyikan (app tetap jalan di tray)">✕</button>
+      </div>
+    </div>
+    <div id="popup-toolbar">
+      <button id="btn-pick-file">📄 Simpan Sebagai...</button>
+      <span id="picked-file-label">Belum ada file target</span>
+      <button id="btn-toggle-conn">🔌 Connect</button>
+    </div>
+    <div id="popup-chat"></div>
+    <div id="popup-input-line">
+      <input type="text" id="popup-input" placeholder="Ketik perintah atau pesan..." autocomplete="off" />
+      <button id="popup-send">➤ Kirim</button>
+    </div>
+  </div>
+
+  <button id="open-popup-btn" class="hidden" title="Buka AI Console">🐾</button>
+
+  <script src="main.js"></script>
+</body>
+</html>

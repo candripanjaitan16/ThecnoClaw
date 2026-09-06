@@ -1,0 +1,263 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #0a0e0a;
+  color: #00ff7f;
+  font-family: "Cascadia Code", "Fira Code", Consolas, monospace;
+  font-size: 14px;
+  height: 100vh;
+  overflow: hidden;
+}
+
+#terminal {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+}
+
+#output {
+  flex: 1;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+  padding-bottom: 8px;
+}
+
+#output .line {
+  margin-bottom: 2px;
+}
+
+#output .prompt-echo {
+  color: #00ff7f;
+}
+
+#output .info {
+  color: #7fdbff;
+}
+
+#output .success {
+  color: #39ff14;
+  font-weight: bold;
+}
+
+#output .error {
+  color: #ff4d4d;
+}
+
+#output .dim {
+  color: #5a6a5a;
+}
+
+#output .ai-response {
+  color: #ffe066;
+}
+
+#input-line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-top: 1px solid #1a2e1a;
+  padding-top: 8px;
+}
+
+#prompt {
+  color: #00ff7f;
+  white-space: nowrap;
+  font-weight: bold;
+}
+
+#cmd-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #00ff7f;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+/* Popup command bar */
+#popup {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 420px;
+  height: 520px;
+  background: #0d1410;
+  border: 1px solid #1f3a1f;
+  border-radius: 10px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 999;
+}
+
+#popup.hidden {
+  display: none;
+}
+
+#popup-header {
+  background: #122012;
+  padding: 10px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #1f3a1f;
+}
+
+#popup-title {
+  font-size: 13px;
+  color: #00ff7f;
+  font-weight: bold;
+}
+
+#popup-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#conn-status {
+  font-size: 11px;
+}
+
+#conn-status.connected {
+  color: #39ff14;
+}
+
+#conn-status.disconnected {
+  color: #ff4d4d;
+}
+
+#popup-close {
+  background: transparent;
+  border: none;
+  color: #7fdbff;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+#popup-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-bottom: 1px solid #1a2e1a;
+  font-size: 12px;
+}
+
+#popup-toolbar button {
+  background: #14261a;
+  border: 1px solid #24402a;
+  color: #7fdbff;
+  padding: 5px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+#popup-toolbar button:hover {
+  background: #1c3423;
+}
+
+#picked-file-label {
+  flex: 1;
+  color: #5a6a5a;
+  font-size: 11px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#btn-toggle-conn {
+  margin-left: auto;
+}
+
+#popup-chat {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px 12px;
+  font-size: 13px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.chat-bubble {
+  padding: 8px 10px;
+  border-radius: 8px;
+  max-width: 90%;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.chat-bubble.user {
+  align-self: flex-end;
+  background: #14261a;
+  color: #7fdbff;
+}
+
+.chat-bubble.ai {
+  align-self: flex-start;
+  background: #1a1a12;
+  color: #ffe066;
+}
+
+.chat-bubble.system {
+  align-self: center;
+  color: #5a6a5a;
+  font-size: 11px;
+}
+
+#popup-input-line {
+  display: flex;
+  border-top: 1px solid #1a2e1a;
+  padding: 8px;
+  gap: 6px;
+}
+
+#popup-input {
+  flex: 1;
+  background: #0a0e0a;
+  border: 1px solid #1f3a1f;
+  border-radius: 6px;
+  color: #00ff7f;
+  padding: 8px 10px;
+  outline: none;
+  font-family: inherit;
+  font-size: 13px;
+}
+
+#popup-send {
+  background: #1c3423;
+  border: 1px solid #24402a;
+  color: #39ff14;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+#open-popup-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #14261a;
+  border: 1px solid #24402a;
+  color: #39ff14;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 998;
+}
+
+#open-popup-btn.hidden {
+  display: none;
+}

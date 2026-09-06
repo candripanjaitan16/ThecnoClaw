@@ -1,0 +1,17 @@
+{
+  "name": "thecnoclaw",
+  "version": "0.1.0",
+  "description": "TheCnoClaw - AI Terminal Desktop App",
+  "scripts": {
+    "tauri": "tauri"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^2"
+  },
+  "dependencies": {
+    "@tauri-apps/api": "^2",
+    "@tauri-apps/plugin-dialog": "^2",
+    "@tauri-apps/plugin-fs": "^2",
+    "@tauri-apps/plugin-shell": "^2"
+  }
+}

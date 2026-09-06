@@ -1,0 +1,52 @@
+name: 'Publish Release'
+
+on:
+  push:
+    tags:
+      - 'v*' # Memicu otomatis jika Anda push tag seperti v1.0.0
+
+jobs:
+  publish-tauri:
+    permissions:
+      contents: write
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: 'macos-latest'
+            args: ''
+          - platform: 'ubuntu-22.04' # Untuk Linux
+            args: ''
+          - platform: 'windows-latest' # Untuk Windows
+            args: ''
+
+    runs-on: ${{ matrix.platform }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+
+      - name: install Rust stable
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: install dependencies (Ubuntu only)
+        if: matrix.platform == 'ubuntu-22.04'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.1-dev build-essential curl wget file libxdo-dev libssl-dev libayatana-appindicator3-dev librsvg2-dev
+
+      - name: install frontend dependencies
+        run: npm install # atau yarn install / pnpm install tergantung yang Anda gunakan
+
+      - uses: tauri-apps/tauri-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tagName: ${{ github.ref_name }}
+          releaseName: 'ThecnoClaw ${{ github.ref_name }}'
+          releaseBody: 'Silakan unduh untuk Windows atau Linux di bawah.'
+          releaseDraft: false
+          prerelease: false

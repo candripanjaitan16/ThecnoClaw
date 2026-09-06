@@ -13,9 +13,7 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - platform: 'macos-latest'
-            args: ''
-          - platform: 'ubuntu-22.04' # Untuk Linux
+          - platform: 'ubuntu-22.04' # Untuk Linux Mint / Ubuntu
             args: ''
           - platform: 'windows-latest' # Untuk Windows
             args: ''
@@ -39,14 +37,24 @@ jobs:
           sudo apt-get install -y libwebkit2gtk-4.1-dev build-essential curl wget file libxdo-dev libssl-dev libayatana-appindicator3-dev librsvg2-dev
 
       - name: install frontend dependencies
-        run: npm install # atau yarn install / pnpm install tergantung yang Anda gunakan
+        run: |
+          if [ -f "package-lock.json" ]; then
+            npm ci
+          elif [ -f "yarn.lock" ]; then
+            yarn install --frozen-lockfile
+          elif [ -f "pnpm-lock.yaml" ]; then
+            corepack enable && pnpm install --frozen-lockfile
+          else
+            npm install
+          fi
+        shell: bash
 
-      - uses: tauri-apps/tauri-action@v2
+      - uses: tauri-apps/tauri-action@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tagName: ${{ github.ref_name }}
           releaseName: 'ThecnoClaw ${{ github.ref_name }}'
-          releaseBody: 'Silakan unduh untuk Windows atau Linux di bawah.'
+          releaseBody: 'Silakan unduh installer untuk Windows (.exe) atau Linux Mint (.deb/.AppImage) di bawah ini.'
           releaseDraft: false
           prerelease: false
